@@ -1,0 +1,9 @@
+/*
+!/.gitignore
+!/README.md
+!/RELEASE_NOTES.md
+!/説明書.html
+!/screenshots/
+/screenshots/*
+!/screenshots/*.png
+!/buttons/

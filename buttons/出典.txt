@@ -1,0 +1,4 @@
+丸い拍手の手の線画：Lucide hand（2つを重ね、回転・配置を調整）。
+https://github.com/lucide-icons/lucide/blob/main/icons/hand.svg
+取得日：2026-10-30。利用許諾は LUCIDE-LICENSE.txt に同梱。
+フォントファイルは同梱していません。

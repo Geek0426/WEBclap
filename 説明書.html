@@ -1,0 +1,35 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WEB拍手（再）説明書</title>
+<style>body{font:16px/1.85 Meiryo,sans-serif;color:#303b45;background:#fafafa;margin:0}main{max-width:880px;margin:auto;padding:28px}h1{font-size:28px}h2{font-size:22px;margin-top:2em;border-bottom:1px solid #cddde9}h3{font-size:18px}a{color:#286b9e}pre{background:#eaf2f8;padding:16px;white-space:pre-wrap;overflow-wrap:anywhere}code{font-family:monospace}table{border-collapse:collapse;width:100%}th,td{padding:10px;text-align:left;border:1px solid #d4dfe7;overflow-wrap:anywhere}li{margin:.4em 0}.note{background:#eaf2f8;padding:14px;border-radius:8px}footer{margin:40px 0;text-align:center}</style>
+<main><h1>WEB拍手（再）</h1><p>日本語版 1.0.0 ／ 2026年10月30日</p><p>サイトの訪問者から拍手やメッセージを受け取り、お礼画面とお返事ページを作れるアプリです。</p>
+<nav><a href="#install">設置</a> · <a href="#buttons">拍手ボタン</a> · <a href="#replies">お返事リンク</a> · <a href="#settings">設定</a> · <a href="#recovery">困った時</a> · <a href="#rights">利用条件</a></nav>
+<h2>使えるサーバー</h2><p>PHP 8.3以上、HTTPS、ファイルの保存・ロック、Fileinfoが必要です。データベースの契約・設定は不要です。保存先の直接アクセスを禁止できるApache互換の環境を想定しています。メール通知にはOpenSSLとSMTP送信が必要です。公開URLとサーバー内部の接続先が異なる環境ではcURLも必要です。</p>
+<p>初回の「設置環境を確認する」で、実際の設置先を確認します。アクセス保護を確認できない環境では開始できません。<code>.htaccess</code> を無視するサーバーや、PHPを置けないホームページサービスには、そのまま設置できません。</p>
+<table><tr><th>環境</th><th>確認範囲</th></tr><tr><td>さくらのレンタルサーバー</td><td>制作者のテスト環境で、初回設定・拍手・メッセージ・メール受信・返信・画像・カスタム画面を確認済み（2026年10月）。全プランでの動作を保証するものではありません。</td></tr><tr><td>その他のレンタルサーバー</td><td>未実機検証です。上記条件と初回の環境確認を利用してください。</td></tr></table>
+<p>開発PCでの自動検査はPHP 8.5.7を使用しています。PHP 8.3/8.4と実スマートフォンでの操作は未実機検証です。</p>
+<h2 id="install">1. アップロードと初回設定</h2><ol><li>ZIPを展開します。説明書と、アプリ本体の <code>webclap-sai</code> フォルダがあります。</li><li>FTPソフトなどで、そのフォルダをサイトの新しい空の場所へ送信します。既存の拍手や別のアプリに上書きしないでください。隠しファイルの <code>.htaccess</code> も含めます。</li><li>設置先のURLに <code>/public/index.php</code> を付けて、HTTPSで開きます。</li><li>「設置環境を確認する」→ログイン用パスワードを設定します。パスワードは忘れないように保管してください。</li><li>機能設定で、日付を切り替える地域を確認します。拍手を受け取った後は地域を変更できないので、先に確認してください。</li></ol>
+<p class="note">例として <code>https://example.com/webclap-sai/</code> に置いた場合、管理画面は <code>https://example.com/webclap-sai/public/index.php</code> です。サーバーの初期ドメインと独自ドメインで公開フォルダが異なる場合があります。FTP上の場所だけでなく、実際のURLを確認してください。</p>
+<table><tr><th>入口</th><th>上の例でのURLの末尾</th></tr><tr><td>管理者用</td><td>/webclap-sai/public/index.php</td></tr><tr><td>読者の拍手画面</td><td>/webclap-sai/public/clap.php</td></tr><tr><td>読者の拍手返信ページ</td><td>/webclap-sai/public/replies.php</td></tr></table>
+<p>拍手画面は開くと拍手として記録されます。見た目だけ確認したい時は管理画面のプレビューを使ってください。</p>
+<h2 id="buttons">2. サイトに拍手ボタンを貼る</h2><p><a href="webclap-sai/public/buttons/index.html">36種類のボタン素材・設置コード一覧を開く</a></p><ol><li>一覧の「設置先」に自分の <code>public</code> フォルダの場所を入れます。上の例なら <code>/webclap-sai/public/</code> です。</li><li>好きなボタンの「コードをコピー」を押します。</li><li>サイトのHTMLの、ボタンを表示したい場所（小説の最後など）へ貼ります。画像はアプリと一緒にアップロード済みなので、別途保存し直す必要はありません。</li></ol>
+<p>文字だけのボタンを使う場合は、次のコードを使えます。</p>
+<pre>&lt;button type="button" data-webclap-button&gt;拍手する&lt;/button&gt;
+&lt;script src="/webclap-sai/public/webclap-button.js" defer&gt;&lt;/script&gt;</pre>
+<p><code>/webclap-sai/public/</code> は自分の設置先に置き換えます。同じページに何個もボタンを置く時、scriptの行は1回だけで構いません。画像を載せるだけでは拍手は送られません。コードには必要なボタン属性とスクリプトが含まれています。</p>
+<p>同じタブ／新しいタブの選択は、管理画面の機能設定に従います。拍手画面OFFならページを移動せずに記録し、設定がONなら右下のお礼を表示します。上限に達した場合は拍手上限ページを開きます。</p>
+<p class="note">この設置コードは、拍手アプリと同じドメイン・通信方式のページで使ってください。たとえば独自ドメインのサイトから、サーバー初期ドメインのアプリを呼び出す使い方には対応していません。</p>
+<h3>WordPressを使っている場合</h3><p>WordPress専用のプラグインは不要ですが、編集方法やセキュリティ設定によってscriptタグが取り除かれる場合があります。WordPress編集画面からの設置は未実機検証です。現時点での確認済み範囲は、同じドメイン上のHTMLページへの設置です。</p>
+<h2 id="replies">3. 拍手返信ページへのリンク</h2><p>公開したお返事は <code>public/replies.php</code> に表示されます。サイトのメニューなどへ次のリンクを貼ります。</p>
+<pre>&lt;a href="/webclap-sai/public/replies.php"&gt;拍手のお返事&lt;/a&gt;</pre>
+<p>別タブで開くなら次の形です。このリンクに拍手ボタン用のscriptは不要です。</p>
+<pre>&lt;a href="/webclap-sai/public/replies.php" target="_blank" rel="noopener noreferrer"&gt;拍手のお返事&lt;/a&gt;</pre>
+<p>管理画面のURLを読者用リンクとして貼らないでください。返信ページの表示をOFFにすると公開表示が止まりますが、保存したお返事は残ります。</p>
+<h2 id="settings">4. 管理画面の使い方</h2><h3>ホーム</h3><p>今日・今月の拍手数とカレンダーを表示します。赤い丸は新しい拍手、青い丸はメッセージのある日です。その日付を開くと赤い丸が消え、また拍手が届くと付きます。</p><p>メッセージを選んでお返事を書き、公開します。宛名は日付・名前・冒頭を組み合わせて作り、書き換えられます。公開するのは宛名とお返事で、受信本文全体は自動転載しません。「返信済み」は非公開にしても残り、お返事を削除すると消えます。</p>
+<h3>機能設定</h3><p>表示・通知・回数制限をON/OFFで選びます。詳しい設定は開閉できます。変更後は「保存」または「決定」を押してください。メール通知をONにして未設定なら入力欄が開きます。</p><p>上限は同じブラウザを目安に1日単位で数えます。Cookie削除や別ブラウザまで厳密に同一人物とは判定しません。上限5回なら5回目を受け付けてから上限ページへ進み、6回目以降は拍手・メッセージを受け付けません。日付は登録した地域の夜0時に切り替わります。拍手画面の再読み込みも1回に数えますが、同じメッセージの再送は防ぎます。</p>
+<h3>メール通知</h3><p>初期状態はOFFです。通知したい人だけ、通知先1件とSMTP設定を登録します。接続方式を選ぶとポート番号も切り替わります。送信用パスワードにはメールサービスのパスワードを入力します。管理画面用のパスワードとは別です。</p><p>メッセージ付きの拍手を受け付けると、件名「WEB拍手」、名前と全文を送ります。サイトのリンクは載せません。拍手だけの場合は送りません。通知に失敗してもメッセージは保存され、管理画面から読めます。失敗したメールの自動再送はありません。</p>
+<h3>デザイン設定</h3><p>「拍手画面」と「拍手返信ページ」を選びます。拍手画面のお礼セットは画像だけ・文章だけ・両方を登録でき、保存済みセットからランダム表示します。最後の1セットは削除できません。拍手上限ページは別に登録します。画像はJPEG・PNG・GIF・WebPで1枚10MBまで（サーバー上限が低い場合は画面に表示）。</p><p>初期のお礼はサンプルです。使い始める前に差し替えてください。共通デザインの文字色は背景に合わせる自動と手動を選べます。送信ボタンをOFFにすると名前欄・メッセージ欄も表示されません。</p><p>カスタムはセットごとにHTML・CSSを保存できます。UTF-8で各100KBまで。画像は「画像を選んで挿入」を使い、フォームは「送信フォームを挿入」で置けます。返信ページでは「お返事一覧を挿入」を使います。外部ファイルやJavaScriptを実行するための機能ではありません。</p>
+<h2 id="recovery">5. 困った時・パスワードを忘れた時</h2><ul><li><strong>404になる：</strong>アップロード先と公開URL、フォルダ名、publicの位置を確認します。</li><li><strong>保護を確認できない：</strong>Settingの .htaccess、書き込み権限、PHPのcURL、サーバーから自分のURLへの接続を確認します。保護を解除して進めないでください。</li><li><strong>画像が出ない：</strong>画像フォルダも送信したか、コードの設置先が正しいか確認します。</li><li><strong>メールが届かない：</strong>通知ON・保存済み、SMTP情報、迷惑メール欄を確認します。メッセージが管理画面に残っているか確認してください。</li><li><strong>変更が見えない：</strong>保存の完了を確認して再読み込みします。キャッシュ機能がある場合は対象ページのキャッシュも確認します。</li></ul>
+<p>パスワードを忘れた場合は、次の手順で再設定します。</p><ol><li>FTPまたはサーバーのファイルマネージャーで <code>Setting/auth/admin_auth.json</code> だけを削除します。</li><li>管理画面を開き、環境確認をして新しいパスワードを設定します。</li><li>復旧完了です。Setting全体は削除しないでください。お礼・受信メッセージ・設定は残ります。</li></ol>
+<p>認証ファイルを消した後は、間を空けずに新しいパスワードを設定してください。この間は新しいパスワード設定だけが可能で、過去の管理データは閲覧できません。</p>
+<h2>6. バックアップ・更新・削除</h2><p>定期的に、アプリのフォルダ全体をFTPなどでダウンロードして保管してください。特にSettingには認証・通知設定・画像・受信メッセージが含まれるため、公開したり第三者へ渡したりしないでください。</p><p>この1.0.0は新規設置用です。既存版への更新では、先にバックアップを取り、そのバージョンの更新案内に従ってください。空のSettingで運用中のSettingを置き換えないでください。旧CGIや他製品のデータを直接上書きする移行には対応していません。</p><p>削除する時は、サイトに貼ったボタン・script・返信ページリンクを外し、必要なデータを保管してから、このアプリを置いたフォルダだけを削除します。</p>
+<h2 id="rights">著作権・ご利用について</h2><p>「WEB拍手（再）」のオリジナル部分（プログラム・デザイン・同梱素材・説明書）の著作権は、制作者の紫音（COUNT0....）に帰属します。</p><p>本アプリおよび同梱素材の再配布・転載、ならびにアプリ本体の改変は禁止します。</p><p>ご自身のサイトへの設置・利用、管理画面からの設定変更、本アプリが用意するカスタム機能でのHTML・CSS編集、設置コードの書き換えは可能です。同梱ボタン素材も、ご自身のサイトで拍手ボタンとしてご利用いただけます。</p><p>利用者ご自身が登録した画像・文章などの権利は、それぞれの権利者に帰属します。</p><p>外部ライブラリおよび第三者の素材には、それぞれの著作権表示・ライセンスが適用されます。PHPMailerは vendor/phpmailer/LICENSE、CA証明書は vendor/ca/README.md、丸い拍手の線画は public/buttons/LUCIDE-LICENSE.txt をご確認ください。本アプリの禁止事項によって、これらのライセンスに基づく利用を制限するものではありません。</p>
+<footer>WEB拍手（再）：Created by <a href="https://count0.xyz/" target="_blank" rel="noopener noreferrer">COUNT0....</a></footer></main></html>
