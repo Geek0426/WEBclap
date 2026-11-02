@@ -44,6 +44,13 @@ SNSじゃない。いいね数を競うものでもない。
 
 ---
 
+## 1.1.1 の更新内容（2026年11月3日）
+
+- お礼の表示方法を「拍手画面／簡易メッセージお礼」の選択式に変更し、どちらか一方を表示することが分かりやすくなりました。
+- 既存の設定・データを引き継ぎ、日本語版・英語版の説明書も更新しました。
+
+1.0.0・1.1.0からの更新は [更新手順](UPDATE.md) をご覧ください。**運用中の `Setting` は置き換えず、`public`・`src`・`vendor` だけを更新してください。**
+
 ## 1.1.0 の更新内容（2026年10月31日）
 
 - カレンダーで、拍手のあった日を太字、新着メッセージを赤丸、メッセージ・お返事がある日を青丸で表示するよう改善しました。既存の既読状態も引き継ぎます。
@@ -58,7 +65,7 @@ SNSじゃない。いいね数を競うものでもない。
 
 ## 画面の見本
 
-**写真は日本語版1.0.0のテスト画面です。** 1.1.0で追加したカレンダー表示・過去メッセージ一覧・公開URLの表示は、これらの写真には含まれていません。公開用に一部の情報を隠しています。
+**写真は日本語版1.0.0のテスト画面です。** 1.1.0で追加したカレンダー表示・過去メッセージ一覧・公開URLの表示は、これらの写真には含まれていません。1.1.1で変更したお礼の選択UIも、これらの写真には含まれていません。公開用に一部の情報を隠しています。
 
 <details>
 <summary><h3>ホーム・機能設定・お返事ページ・ボタン一覧を見る</h3></summary>
@@ -206,8 +213,8 @@ GitHubの **Releases** から、使いたい言語のZIPをダウンロードし
 
 | ファイル | 言語 |
 | --- | --- |
-| [WEBclap-sai-1.1.0-ja.zip](https://github.com/Geek0426/WEBclap/releases/latest) | 日本語版 |
-| [WEBclap-sai-1.1.0-en.zip](https://github.com/Geek0426/WEBclapEnglish/releases/latest) | English |
+| [WEBclap-sai-1.1.1-ja.zip](https://github.com/Geek0426/WEBclap/releases/latest) | 日本語版 |
+| [WEBclap-sai-1.1.1-en.zip](https://github.com/Geek0426/WEBclapEnglish/releases/latest) | English |
 
 [English version / Web Clap (Again)](https://github.com/Geek0426/WEBclapEnglish)
 
